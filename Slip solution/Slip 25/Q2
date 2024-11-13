@@ -1,0 +1,49 @@
+// Create Departments
+CREATE (d1:Department {name: 'Physics', location: 'Building A', faculty_count: 30}),
+       (d2:Department {name: 'Geography', location: 'Building B', faculty_count: 20}),
+       (d3:Department {name: 'Computer Science', location: 'Building C', faculty_count: 50});
+
+// Create Courses
+CREATE (c1:Course {course_name: 'Quantum Mechanics', course_code: 'PH101', credits: 4}),
+       (c2:Course {course_name: 'Geography 101', course_code: 'GEO101', credits: 3}),
+       (c3:Course {course_name: 'Algorithms', course_code: 'CS101', credits: 4});
+
+// Create People
+CREATE (p1:Person {name: 'Dr. John Smith', designation: 'Professor', email: 'john.smith@university.com'}),
+       (p2:Person {name: 'Dr. Emily White', designation: 'Assistant Professor', email: 'emily.white@university.com'});
+
+// Create Recommendations
+CREATE (r1:Recommendation {recommendation_text: 'Highly recommend this course!', rating: 5, timestamp: '2024-11-14'}),
+       (r2:Recommendation {recommendation_text: 'A must-take course!', rating: 4, timestamp: '2024-11-13'});
+
+// Create Relationships
+CREATE (d1)-[:OFFERS {semester: 'Fall', academic_year: '2024'}]->(c1),
+       (d2)-[:OFFERS {semester: 'Fall', academic_year: '2024'}]->(c2),
+       (d3)-[:OFFERS {semester: 'Fall', academic_year: '2024'}]->(c3),
+
+       (c1)-[:RECOMMENDED_BY {rating: 5, comment: 'Great course!'}]->(p1),
+       (c2)-[:RECOMMENDED_BY {rating: 4, comment: 'Interesting content.'}]->(p2),
+
+       (d2)-[:HAS_RECOMMENDATIONS]->(r1),
+       (d3)-[:HAS_RECOMMENDATIONS]->(r2);
+
+
+ Cypher Queries
+
+ MATCH (d:Department)
+RETURN d.name AS Department, d.location AS Location, d.faculty_count AS FacultyCount;
+
+
+MATCH (d:Department {name: 'Physics'})-[:OFFERS]->(c:Course)
+RETURN c.course_name AS CourseName;
+
+
+MATCH (d:Department {name: 'Geography'})-[:OFFERS]->(c:Course)<-[:RECOMMENDED_BY]-(p:Person)
+WITH c, COUNT(p) AS recommendation_count
+ORDER BY recommendation_count DESC
+LIMIT 1
+RETURN c.course_name AS MostRecommendedCourse;
+
+
+MATCH (d1:Department {name: 'Mathematics'})-[:OFFERS]->(c:Course)<-[:OFFERS]-(d2:Department {name: 'Computer Science'})
+RETURN c.course_name AS CommonCourses;

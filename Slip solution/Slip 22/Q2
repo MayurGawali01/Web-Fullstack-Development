@@ -1,0 +1,66 @@
+// Creating car models
+CREATE (c1:CarModel {name: "Honda City", brand: "Honda"})
+CREATE (c2:CarModel {name: "Skoda", brand: "Skoda"})
+CREATE (c3:CarModel {name: "Creta", brand: "Hyundai"})
+CREATE (c4:CarModel {name: "Swift", brand: "Maruti"})
+CREATE (c5:CarModel {name: "Ertiga", brand: "Maruti"})
+
+// Creating sections
+CREATE (s1:Section {section_name: "Honda City Section"})
+CREATE (s2:Section {section_name: "Skoda Section"})
+CREATE (s3:Section {section_name: "Hyundai Section"})
+CREATE (s4:Section {section_name: "Maruti Section"})
+
+// Creating sales staff
+CREATE (st1:SalesStaff {name: "Mr. Narayan"})
+CREATE (st2:SalesStaff {name: "Mr. Mehta"})
+
+// Assigning sales staff to sections
+CREATE (st1)-[:HANDLES]->(s1)
+CREATE (st1)-[:HANDLES]->(s2)
+CREATE (st2)-[:HANDLES]->(s3)
+CREATE (st2)-[:HANDLES]->(s4)
+
+// Connecting sections to car models
+CREATE (s1)-[:DISPLAYS]->(c1)
+CREATE (s2)-[:DISPLAYS]->(c2)
+CREATE (s3)-[:DISPLAYS]->(c3)
+CREATE (s4)-[:DISPLAYS]->(c4)
+CREATE (s4)-[:DISPLAYS]->(c5)
+
+// Creating customers
+CREATE (cust1:Customer {name: "Alice"})
+CREATE (cust2:Customer {name: "Bob"})
+CREATE (cust3:Customer {name: "Charlie"})
+
+// Creating enquiries by customers
+CREATE (cust1)-[:ENQUIRES_ABOUT {date: "2024-11-01"}]->(c1)
+CREATE (cust2)-[:ENQUIRES_ABOUT {date: "2024-11-02"}]->(c3)
+CREATE (cust3)-[:ENQUIRES_ABOUT {date: "2024-11-03"}]->(c2)
+
+// Creating purchases by customers
+CREATE (cust1)-[:PURCHASES {date: "2024-11-10", price: 12000}]->(c1)
+CREATE (cust2)-[:PURCHASES {date: "2024-11-12", price: 15000}]->(c3)
+
+
+3. Answer the Queries
+
+a:-
+
+MATCH (c:CarModel)
+RETURN c.name AS CarModel, c.brand AS Brand
+
+b:-
+MATCH (s:SalesStaff {name: "Mr. Narayan"})-[:HANDLES]->(sec:Section)
+RETURN sec.section_name AS SectionsHandled
+
+c:-
+MATCH (cust:Customer)-[:ENQUIRES_ABOUT]->(c:CarModel)
+WHERE NOT (cust)-[:PURCHASES]->(c)
+RETURN cust.name AS CustomersWithOnlyEnquiry
+
+d:-
+MATCH (cust:Customer)-[p:PURCHASES]->(c:CarModel)
+RETURN c.name AS CarModel, COUNT(p) AS NumberOfPurchases
+ORDER BY NumberOfPurchases DESC
+LIMIT 1

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Text with Effects</title>
+  <style>
+    /* Basic styling for the body */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    /* Container for text overflow and wrapping effects */
+    .text-container {
+      width: 300px;
+      border: 2px solid #333;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap; /* Use word-wrap: break-word; to break long words */
+    }
+
+    /* Styling for the 3D text */
+    .threeD-text {
+      font-size: 48px;
+      font-weight: bold;
+      color: #333;
+      position: relative;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    /* 3D shadow effect */
+    .threeD-text:hover {
+      transform: translateZ(30px) scale(1.1);
+      text-shadow: 3px 3px 0px #ff3b3b,   /* Red shadow */
+                   6px 6px 0px #ff9a3b,   /* Orange shadow */
+                   9px 9px 0px #fff33b,   /* Yellow shadow */
+                   12px 12px 0px #9aff3b, /* Light green shadow */
+                   15px 15px 0px #3bffbd, /* Teal shadow */
+                   18px 18px 0px #3b75ff; /* Blue shadow */
+    }
+
+    /* Wrapping long words */
+    .wrap-text {
+      word-wrap: break-word;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      background-color: #eaeaea;
+      border: 1px dashed #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Container for text overflow effect -->
+  <div class="text-container">
+    <span class="threeD-text">Hover Over Me For 3D Effect!</span>
+  </div>
+
+  <!-- Container for word wrapping effect -->
+  <div class="wrap-text">
+    SuperLongWordWithoutAnySpacesSoItWillWrap!
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3eaf7;
+        }
+        .form-container {
+            background-color: #b3e0ff;
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 2px #000;
+        }
+        h2 {
+            text-align: center;
+            color: red;
+            font-size: 24px;
+        }
+        label {
+            font-size: 18px;
+            color: red;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .submit-btn, .reset-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100px;
+        }
+        .submit-btn:hover, .reset-btn:hover {
+            background-color: #ff3333;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>ENTRY FORM</h2>
+        <form>
+            <label>Enter your Name:</label>
+            <input type="text" name="name" placeholder="Your Name">
+
+            <label>Enter your Age:</label>
+            <input type="number" name="age" placeholder="Your Age">
+
+            <label>Enter your Address:</label>
+            <textarea name="address" rows="4" placeholder="Your Address"></textarea>
+
+            <label>Sex:</label>
+            <input type="radio" name="sex" value="Female"> Female
+            <input type="radio" name="sex" value="Male"> Male
+
+            <label>Nationality:</label>
+            <select name="nationality">
+                <option value="">Please select a country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label>Languages Known: (can select more than one)</label>
+            <input type="checkbox" name="language" value="C"> C
+            <input type="checkbox" name="language" value="C++"> C++
+            <input type="checkbox" name="language" value="VB"> VB
+            <input type="checkbox" name="language" value="Java"> JAVA
+            <input type="checkbox" name="language" value="ASP"> ASP
+            <input type="checkbox" name="language" value="Others"> OTHERS
+
+            <label>Enter your Password:</label>
+            <input type="password" name="password" placeholder="Your Password">
+
+            <div class="button-container">
+                <button type="reset" class="reset-btn">Reset</button>
+                <button type="submit" class="submit-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
